@@ -18,3 +18,6 @@ Thumbs.db
 
 # PDF 资料
 *.pdf
+
+# 本地图片缓存（使用外部 CDN）
+assets/
