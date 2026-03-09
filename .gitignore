@@ -15,3 +15,6 @@ Thumbs.db
 # 本地配置
 .env
 .env.local
+
+# PDF 资料
+*.pdf
