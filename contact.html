@@ -39,6 +39,12 @@
       <div class="contact-form">
         <h2 class="section-title">联系方式</h2>
         <p class="section-subtitle">欢迎来电或邮件咨询，我们的技术团队随时为您提供选型建议和技术支持</p>
+        <div id="brandRequest" style="display:none; margin: 0 0 1.25rem; padding: 0.9rem 1rem; border-radius: var(--radius); border: 1px solid rgba(0, 212, 170, 0.35); background: rgba(0, 212, 170, 0.08); color: var(--text-secondary);">
+          您正在咨询：<strong id="brandName" style="color: var(--accent-cyan);"></strong>。我们可以提供该品牌的产品目录/选型资料/应用方案等材料。
+          <div style="margin-top: 0.5rem;">
+            <a id="brandMailLink" href="mailto:kinkar@linposh.com.cn" style="color: var(--accent-cyan); text-decoration: none;">一键发邮件索取资料 →</a>
+          </div>
+        </div>
         <div class="contact-info">
           <div class="contact-item">
             <div class="contact-item-icon">📍</div>
@@ -98,5 +104,26 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    (function () {
+      const params = new URLSearchParams(location.search);
+      const brand = params.get('brand');
+      if (!brand) return;
+
+      const box = document.getElementById('brandRequest');
+      const nameEl = document.getElementById('brandName');
+      const mailLink = document.getElementById('brandMailLink');
+      if (!box || !nameEl || !mailLink) return;
+
+      const safeBrand = brand.trim().slice(0, 40);
+      if (!safeBrand) return;
+
+      nameEl.textContent = safeBrand;
+      const subject = encodeURIComponent(`索取产品资料｜${safeBrand}`);
+      const body = encodeURIComponent(`你好，我想索取【${safeBrand}】的产品目录/选型资料/规格书。\n\n应用场景：\n预计用量：\n交期要求：\n联系方式：\n`);
+      mailLink.href = `mailto:kinkar@linposh.com.cn?subject=${subject}&body=${body}`;
+      box.style.display = 'block';
+    })();
+  </script>
 </body>
 </html>
